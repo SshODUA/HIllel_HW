@@ -90,15 +90,6 @@ class AutoNumberFinder:
 
     def find_auto_numbers(self):
         counter = 0
-        for pattern in self._lst_of_templates:
-            for number in re.findall(pattern, self._target_text):
-                counter += 1
-                print(counter, number)
-
-
-
-    def find_auto_numbers(self):
-        counter = 0
         # print(self._lst_of_templates)
         for pattern in self._lst_of_templates:
             # print(pattern)
