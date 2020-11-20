@@ -55,12 +55,12 @@ def task_1_war_2():
 # task_2
 
 class AutoNumberFinder:
-    _lst_of_templates = [r'([A-Я]{2}[1-9]{4}[А-Я]{2})',
-                         r'([0-9]{2}\s[0-9]{3}-[1-9]{2}[А-Я]{2})',
-                         r'([а-я]{1}[0-9]{5}[А-Я]{2})']
-    _target_text = ''
+    # _lst_of_templates = [r'([A-Я]{2}[1-9]{4}[А-Я]{2})',
+    #                      r'([0-9]{2}\s[0-9]{3}-[1-9]{2}[А-Я]{2})',
+    #                      r'([а-я]{1}[0-9]{5}[А-Я]{2})']
+    # _target_text = ''
 
-    def __init__(self, lst_of_templates, target_text):
+    def __init__(self, lst_of_templates=[], target_text=''):
         self._lst_of_templates = lst_of_templates
         self._target_text = target_text
 
@@ -99,17 +99,27 @@ class AutoNumberFinder:
 
 def task_2():
 
+    a_n_f = AutoNumberFinder()
+    print(a_n_f.lst_of_templates)
+    print(a_n_f.target_text)
+    print('*'*100)
+
     list_of_tmpl = [r'([A-Я]{2}[1-9]{4}[А-Я]{2})',
                     r'([0-9]{2}\s[0-9]{3}-[1-9]{2}[А-Я]{2})',
                     r'([а-я]{1}[0-9]{5}[А-Я]{2})']
+    a_n_f.lst_of_templates = list_of_tmpl
+
     text = '12 123-45АВ@#$2$@#23//565а12345ВСАА1234ВВ546/*asdfa034dasq12 155-75АВLewfdrCDSA324234 АА1234ВВ'
-    a_n_f = AutoNumberFinder(list_of_tmpl, text)
+    a_n_f.target_text = text
+
+    print(a_n_f.lst_of_templates)
+    print(a_n_f.target_text)
+    print('*' * 100)
+
     print(a_n_f.find_auto_numbers())
 
 
-
-
-task_2()
+# task_2()
 
 
 
