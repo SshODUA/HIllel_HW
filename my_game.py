@@ -117,6 +117,9 @@ class Brigand(Unit):
             print("It should be an integer")
 
 
+class Mage(Unit):
+    _random_chance = 0.05
+
 
 # test data
 
