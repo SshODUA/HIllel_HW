@@ -97,6 +97,17 @@ class AutoNumberFinder:
 
 
 
+    def find_auto_numbers(self):
+        counter = 0
+        # print(self._lst_of_templates)
+        for pattern in self._lst_of_templates:
+            # print(pattern)
+            for number in re.findall(pattern, self._target_text):
+                counter += 1
+                print(counter, number)
+
+
+
 def task_2():
 
     a_n_f = AutoNumberFinder()
@@ -109,7 +120,7 @@ def task_2():
                     r'([а-я]{1}[0-9]{5}[А-Я]{2})']
     a_n_f.lst_of_templates = list_of_tmpl
 
-    text = '12 123-45АВ@#$2$@#23//565а12345ВСАА1234ВВ546/*asdfa034dasq12 155-75АВLewfdrCDSA324234 АА1234ВВ'
+    text = '12 123-45АВКУвав ваыа12345ВСКУ99 999-99АА!"3_15щз63 551-75ЫЗАА1234ВВ'
     a_n_f.target_text = text
 
     print(a_n_f.lst_of_templates)
@@ -120,6 +131,3 @@ def task_2():
 
 
 # task_2()
-
-
-
