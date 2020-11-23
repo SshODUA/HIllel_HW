@@ -1,6 +1,8 @@
 import re
 
-# task_1_var_1
+#################### task_1_var1 ####################
+
+
 def parse_auto_number_1(auto_number):
     if not isinstance(auto_number, str):
         raise Exception('There should be a string')
@@ -17,7 +19,7 @@ def parse_auto_number_1(auto_number):
     return result_of_parsing
 
 
-def task_1_war_1():
+def task_1_var1():
     print(parse_auto_number_1('а12345ВС'))  # valid
     print(parse_auto_number_1('12 123-45АВ'))  # valid
     print(parse_auto_number_1('АА1234ВВ'))  # valid
@@ -26,10 +28,11 @@ def task_1_war_1():
     print(parse_auto_number_1('АA123!ВВ'))  # invalid
     print(parse_auto_number_1(123))  # invalid
 
-# task_1_war_1()
+# task_1_var1()
+
+#################### task_1_var2 ####################
 
 
-# task_1_var_2
 def parse_auto_number_2(auto_number):
     if not isinstance(auto_number, str):
         raise Exception('There should be a string')
@@ -38,7 +41,7 @@ def parse_auto_number_2(auto_number):
     return auto_number if result_of_search else result_of_search
 
 
-def task_1_war_2():
+def task_1_var2():
     print(parse_auto_number_2('а12345ВС'))  # valid
     print(parse_auto_number_2('12 123-45АВ'))  # valid
     print(parse_auto_number_2('АА1234ВВ'))  # valid
@@ -47,18 +50,18 @@ def task_1_war_2():
     print(parse_auto_number_2('АA123!ВВ'))  # invalid
     print(parse_auto_number_2(123))  # invalid
 
-# task_1_war_2()
+# task_1_var2()
 
 
-##############################################################
+#######################################################################################################
 
-# task_2
 
-class AutoNumberFinder:
-    # _lst_of_templates = [r'([A-Я]{2}[1-9]{4}[А-Я]{2})',
-    #                      r'([0-9]{2}\s[0-9]{3}-[1-9]{2}[А-Я]{2})',
-    #                      r'([а-я]{1}[0-9]{5}[А-Я]{2})']
-    # _target_text = ''
+#################### task_2_var1 ####################
+class AutoNumberFinderV1:
+    _lst_of_templates = [r'([A-Я]{2}[1-9]{4}[А-Я]{2})',
+                         r'([0-9]{2}\s[0-9]{3}-[1-9]{2}[А-Я]{2})',
+                         r'([а-я]{1}[0-9]{5}[А-Я]{2})']
+    _target_text = ''
 
     def __init__(self, lst_of_templates=[], target_text=''):
         self._lst_of_templates = lst_of_templates
@@ -98,10 +101,9 @@ class AutoNumberFinder:
                 print(counter, number)
 
 
+def task_2_v1():
 
-def task_2():
-
-    a_n_f = AutoNumberFinder()
+    a_n_f = AutoNumberFinderV1()
     print(a_n_f.lst_of_templates)
     print(a_n_f.target_text)
     print('*'*100)
@@ -121,4 +123,71 @@ def task_2():
     print(a_n_f.find_auto_numbers())
 
 
-# task_2()
+# task_2_v1()
+
+
+#################### task_2_var2 ####################
+class AutoNumberFinderV2:
+    _template = r''
+    _target_text = ''
+
+    def __init__(self, lst_of_templates=r'', target_text=''):
+        self._lst_of_templates = lst_of_templates
+        self._target_text = target_text
+
+    @property
+    def template(self):
+        return self._template
+
+    @template.setter
+    def template(self, template):
+        if not isinstance(template, str):
+            raise Exception('It should be STRing of templates')
+        if not template:
+            raise Exception('There is not any text')
+        else:
+            self._template = template
+
+    @property
+    def target_text(self):
+        return self._target_text
+
+    @target_text.setter
+    def target_text(self, target_text):
+        if not isinstance(target_text, str):
+            raise Exception('Object for parsing should be STRing.')
+        if not target_text:
+            raise Exception('There is not any text')
+        self._target_text = target_text
+
+    def find_auto_numbers(self):
+        self.result_of_parsing = re.findall(self._template, self._target_text)
+        self.numbered_dct = {}
+        counter = 1
+        for number in self.result_of_parsing:
+            self.numbered_dct.update({counter: number})
+            counter += 1
+        return self.numbered_dct
+
+
+def task_2_v2():
+
+    a_n_f_2 = AutoNumberFinderV2()
+    print('right now template is: ', a_n_f_2.template)
+    print('right now text is: ', a_n_f_2.target_text)
+    print('*'*100)
+
+    tmpl = r'([A-Я]{2}[1-9]{4}[А-Я]{2})'
+    a_n_f_2.template = tmpl
+
+    text = '12 123-45АВКУвав АА1234АВ ваыа12345ВСКУ АА1234БВ 99 999-99АА!"3_15щз63 551-75ЫЗ АА1234ВВ'
+    a_n_f_2.target_text = text
+
+    print('after changes template is: ', a_n_f_2.template)
+    print('after changes template is: ', a_n_f_2.target_text)
+    print('*' * 100)
+
+    print(a_n_f_2.find_auto_numbers())
+
+
+# task_2_v2()
