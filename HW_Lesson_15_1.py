@@ -130,6 +130,7 @@ def task_2_v1():
 class AutoNumberFinderV2:
     _template = r''
     _target_text = ''
+    _numbered_dct = {}
 
     def __init__(self, lst_of_templates=r'', target_text=''):
         self._lst_of_templates = lst_of_templates
@@ -161,13 +162,12 @@ class AutoNumberFinderV2:
         self._target_text = target_text
 
     def find_auto_numbers(self):
-        self.result_of_parsing = re.findall(self._template, self._target_text)
-        self.numbered_dct = {}
+        _result_of_parsing = re.findall(self._template, self._target_text)
         counter = 1
-        for number in self.result_of_parsing:
-            self.numbered_dct.update({counter: number})
+        for number in _result_of_parsing:
+            self._numbered_dct.update({counter: number})
             counter += 1
-        return self.numbered_dct
+        return self._numbered_dct
 
 
 def task_2_v2():
